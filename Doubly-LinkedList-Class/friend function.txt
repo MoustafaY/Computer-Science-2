@@ -1,0 +1,12 @@
+ostream& operator <<(ostream& out, const DList& L)
+{
+	DList::Node* p;
+	p = L.first;
+
+	while (p != NULL)
+	{
+		out << p->data << endl;
+		p = p->next;
+	}
+	return out;
+}
