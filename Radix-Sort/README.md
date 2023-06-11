@@ -1,0 +1,3 @@
+# IMPLEMENTING RADIX SORT
+
+Queues are abstract datatypes that work similarly to stacks but differ in how they sort their data, unlike the stacks, queues store their data by making the first data that is inserted the first data to be removed. The program uses queues in order to store randomly generated numbers that are sorted in ascending order, then prints them in the same order when called for in the terminal.
