@@ -1,0 +1,3 @@
+# Add up the digits of an integer
+
+Adding up digits in an integer can be achieved by taking each integer and adding it to the next one, then the sum of these two integers is added to the third integer and so on. This program takes the input of the user, separates the first and second digits then adds them up, the program repeats this process with the sum and the rest of the digits in the integer. Finally the program will print the sum of the digits in that integer.
