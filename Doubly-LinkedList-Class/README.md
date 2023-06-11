@@ -1,0 +1,3 @@
+# Exercising a double-linked list class
+
+Doubly Linked list are useful when trying to access data in any order the user wants. For this program, the user inputs a lines of characters with a "#" in between some of the characters. For every "#" the program finds, the character before it will be removed. The line of character will continue until the user enters a ".". Then the program will print the new line with all the characters before the "#" removed.
