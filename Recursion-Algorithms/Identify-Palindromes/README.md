@@ -1,0 +1,3 @@
+# Identify Palindromes
+
+Palindromes are identified by comparing the first character with the last character, if they are the same then we move closer to the middle and compare the second pair of characters and so on until we reach the middle, if the characters on the left are also on the right then we can switch each character to its opposite position and we will have the same pattern of characters. The program takes the input from the user as a string, counts the number of characters in that string, assigns each character to an array, calls a function to check if this input is a palindrome or not, and print the result.
