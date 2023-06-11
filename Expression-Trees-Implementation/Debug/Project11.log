@@ -1,0 +1,5 @@
+﻿  Source.cpp
+  main.cpp
+  Generating Code...
+C:\SCSU\Fall 2019\CS301\Projects\Project11\Source.cpp(125): warning C4715: 'binary::r_value': not all control paths return a value
+  Project11.vcxproj -> C:\SCSU\Fall 2019\CS301\Projects\Project11\Debug\Project11.exe
