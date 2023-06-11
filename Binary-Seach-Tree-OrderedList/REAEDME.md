@@ -1,4 +1,4 @@
-#Binary Seach Tree: Ordered List
+# Binary Seach Tree: Ordered List
 
 Binary trees are useful when we want to access and manipulate data quickly without changing their order. When this program runs, the user is given 
 a menu prints the following options in the terminal:
