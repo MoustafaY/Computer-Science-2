@@ -1,0 +1,320 @@
+#include<iostream>
+using namespace std;
+
+void merge(int a[], int low, int mid, int high);//function to sort the array using merge sort
+//Precondition: The array that is to be sorted, the integer of the start of the array,
+//the middle of the array, the integer of the highest place in the array
+//Postcondition: The array will be be sorted
+
+void mergeSort(int a[], int low, int high);//function to divide the array and to call the function merge()
+//Precondition: The array that is to be sorted, the integer of the start of the array,
+//the integer of the highes place in the array
+//Postcondition: The array will be sorted
+
+int countMerge = 0;//integer to count the notations of the merge sort
+
+void insertionSort(int arr[], int n);//function to sort the array using insertion sort
+//Precondition: The array that is to be sorted, the integer of the start of the array,
+//the integer of the size of the array.
+//Postcondition: The array will be sorted.
+
+
+int countInsert = 0;//integer to count the notations of the insertion sort
+
+void swap(int* a, int* b);//function to swap to values of integers
+//Precondition: Two integers that are to be swapped
+//Postcondition: items will swap their values
+
+int partition(int a[], int low, int high);//function to sort the array using quick sort
+//precondition: The array that is to be sorted, the integer of the start of the array,
+//the integer of the highest place in the array.
+//Postcondition: The array will be sorted
+
+void quickSort(int a[], int low, int high);//function to call the function partition()
+//then divide the array
+//Precondition: The array that is to be sorted, the integer of the start of the array
+//the integer of the highest place in the array.
+//Postcondition: The array will be sorted
+
+int countQuick=0;//integer to count the notation of quick sort
+
+void reheap_down(int a[], int parent, int last);//function to sort the array using heap sort
+//Precondition: the array that is to be sorted, the integer of the start of the array
+//the integer that is to be the parent, the integer that is the last place in the array
+//Postcondition: the array will be sorted
+
+void heapSort(int arr[], int n);//function to call the function reheap_down() and re arrange the array
+//Precondition: the array that is to be sorted, the size of the array
+//Postcondition: the array will be sorted
+
+int countHeap = 0;//integer to count the number of notations of heap sort
+
+const int max=5000;//integer to hold the maximum amount of values that can be sorted in this function
+
+int main()
+{
+	int randvalue;//variable to hold the randomly generated values
+	int seed;//variable to hold the seed value
+	int numValue;//variable to hold the number of values the user wants to sort
+	char answer;//variable to hold the answer of the user to print values or not
+	int* merge;//array variable for the merge sort
+	int* heap;//array variable for the heap sort
+	int* insert;//array variable for the insert sort
+	int* quick;//array variable for the quick sort
+
+	cout << "Enter the number of values to generate and sort, between 1 to 5000: ";
+	cin >> numValue;
+	if (numValue <= max)
+	{
+		merge = new int[numValue];
+		heap = new int[numValue];
+		insert = new int[numValue];
+		quick = new int[numValue];
+
+		cout << "Enter an integer seed value: ";
+		cin >> seed;
+
+		cout << "Print values?(y/n): ";
+		cin >> answer;
+
+		srand(seed);
+
+		for (int i = 0; i < numValue; i++)//loop to insert the randomly generated values in the arrays
+		{
+			randvalue = rand();
+			merge[i] = randvalue;
+			heap[i] = randvalue;
+			insert[i] = randvalue;
+			quick[i] = randvalue;
+		}
+
+		mergeSort(merge, 0, numValue - 1);//merge sorts the array
+		heapSort(heap, numValue);//heap sorts the array
+		insertionSort(insert, numValue);//insertion sort the array
+		quickSort(quick, 0, numValue - 1);//quick sort the array
+
+		if (answer == 'y')//if user enters y then print the sorted values of each sort function
+		{
+			cout << "Insertion sorted: " << endl;
+			for (int i = 0; i < numValue; i++)
+			{
+				cout << insert[i] << " ";
+			}
+
+			cout << endl;
+			cout << "Merge Sort: " << endl;
+			for (int i = 0; i < numValue; i++)
+			{
+				cout << merge[i] << " ";
+			}
+
+			cout << endl;
+			cout << "Heap Sort: " << endl;
+			for (int i = 0; i < numValue; i++)
+			{
+				cout << heap[i] << " ";
+			}
+
+			cout << endl;
+			cout << "Quick Sort: " << endl;
+			for (int i = 0; i < numValue; i++)
+			{
+				cout << quick[i] << " ";
+			}
+			cout << endl;
+		}
+
+		cout << "Insertion Sort: " << countInsert << endl;
+		cout << "Merge Sort: " << countMerge << endl;
+		cout << "Quick Sort: " << countQuick << endl;
+		cout << "Heap Sort: " << countHeap << endl;
+
+	}
+	else
+	{
+		cout << "Number of values more than limit" << endl;
+	}
+
+	return 0;
+}
+
+void merge(int a[], int low, int mid, int high)
+{
+	int b[max];//array to hold the input values
+	int i1, i2;//i1 to index the first half of the array, i2 to index the second half of the array
+	int i;//index for all the array
+
+	for (i = low; i <= high; i++)//loop to assign the value to the input array to the internal array
+	{
+		b[i] = a[i];
+		countMerge++;//increments the notation for every time an array value is assigned
+	}
+
+
+	i1 = low;//index holds the lowest place in the array
+	i2 = mid + 1;//index to holds the middle place of the array
+	i = low;//index holds the lowest place of the array
+
+	while (i1 <= mid && i2 <= high)//loop to compare between the array values from the first 
+		//half of the array and the second half of the array
+	{
+		if (b[i1] < b[i2])//if a value in the first half of the array is lower than 
+			// a value in the second half of the array
+		{
+			a[i] = b[i1];//the value in the first half of the array is assigned to the input array
+			i1++;//increment the value of the index of the first half of the array
+			countMerge++;//increment the notation
+		}
+		else//if not
+		{
+			a[i] = b[i2];//the value in the second half of the array is assigned to the input array
+			i2++;//increment the value of the index of the second half of the array
+			countMerge++;//increment the notation
+		}
+		i++;//increment the index of the array
+	}
+
+	while (i1 <= mid)//loop to assign the remaining values in the first half of the array to the input array
+	{
+		a[i] = b[i1];
+		countMerge++;//increments the notatiom
+		i1++;//increments the index of the first half of the array
+		i++;//increments the index of the array
+	}
+	while (i2 <= high)//loop to assign the ramaining values in the second half of the array to input array
+	{
+		a[i] = b[i2];
+		countMerge++;//increments the notation
+		i2++;//increments the index of the second half of the array
+		i++;//increments the index of the array
+	}
+}
+
+void mergeSort(int a[], int low, int high)
+{
+	int mid;//variable to the middle place in the array 
+
+	if (low < high)//if the low input integer is less than the high input integer
+	{
+		mid = (low + high) / 2;//calculate the middle index
+		mergeSort(a, low, mid);//recur the function with the middle index at the high parameter
+		mergeSort(a, mid + 1, high);//recur the function withe middle +1 index at the low parameter
+		merge(a, low, mid, high);//call the merge function
+	}
+}
+
+void insertionSort(int arr[], int n)
+{
+	int i, key, j;//i holds the index of the array, key holds the value of the current value of the current array
+	//j holds the index of the i -1
+	for (i = 1; i < n; i++)
+	{
+		key = arr[i];
+		j = i - 1;
+
+
+		while (j >= 0 && arr[j] > key)//loop that will continue as long as the j index is above 0 and the 
+			//value of the array at j index is larger than the key
+		{
+			countInsert++;//increment the notation value
+			arr[j + 1] = arr[j];// array at index j+1 holds the value of the array at index j
+			j --;//decrement the value of j
+		}
+		arr[j + 1] = key;//array at index j+1 hold the value of the key variable
+	}
+}
+
+void swap(int* a, int* b)
+{
+	int t = *a;
+	*a = *b;
+	*b = t;
+}
+
+int partition(int arr[], int low, int high)
+{
+	int pivot = arr[high];//variable holds the value of the array at the high index
+	int i = (low - 1);//i holds the value of low -1
+	int j = low;//j holds the value of low
+	while (j < high)//loop that will stop once j is larger than or equal to high
+	{
+
+		if (arr[j] < pivot)//if the value of the array at index j is less than the value of the pivot
+		{
+			i++;//increment the value of i
+			swap(&arr[i], &arr[j]);//swap the values of array at index i and array at index j
+		}
+		countQuick++;//increment the notation
+		j++;//increment the value of hte j index
+	}
+	swap(&arr[i + 1], &arr[high]);//swap the values of array at index i +1 and array at index high
+	return (i);//return the value of i
+}
+
+void quickSort(int arr[], int low, int high)
+{
+	if (low < high)//if the value of the low parameter is less than the value of the high parameter
+	{
+
+		int pi = partition(arr, low, high);//variable pi holds the returned value of partition
+
+		quickSort(arr, low, pi);//quickSort function is called with the variable pi at the high parameter
+		quickSort(arr, pi + 2, high);//quickSort function is called with the variable pi+2 at the low parameter 
+	}
+}
+
+void reheap_down(int a[], int parent, int last)
+{
+	int max_child;//variable to hold the highest value child variable
+	bool done = false;//bool to flag when the loop should stop
+
+	while (2 * parent + 1 <= last && !done)//loop that works as long as the parent *2 +1 is less than or equal to 
+		//the last parameter, and the done variable is false
+	{
+		max_child = 2 * parent + 1;//max_childs holds the value of parent parameter multiplied by
+		//2 and 1 is added to it
+		if (max_child<last && a[max_child + 1]>a[max_child])//if max_child is less than the last parameter and the 
+			//value of the array at index max_child +1 is less than the value of the array at index
+			//max_child
+		{
+			max_child++;//increment the value of max_child
+		}
+		if (a[max_child] > a[parent])//if the value of the array at max_child index is less than 
+			// the value of the array at the parent index
+		{
+			swap(a[max_child], a[parent]);//swap the value of the array at the max_child index with the 
+			countHeap++;
+			//value of the array at the parent index
+			parent = max_child;//parent index holds the value of the max_child
+		}
+		else//if not
+		{
+			done = true;//done variable is true
+		}
+	}
+
+}
+
+
+void heapSort(int arr[], int n)
+{
+
+	for (int i = n / 2 - 1; i >= 0; i--)//loop function to re arrange the array as a heap structure
+	{
+		reheap_down(arr, i, n - 1);
+
+	}
+
+
+	for (int i = n - 1; i >= 0; i--)
+	{
+		 
+		swap(arr[0], arr[i]);//swap the value of the array at index 0 with the value of the
+		//array at index i
+		countHeap++;//increment notation
+
+ 
+		reheap_down(arr, 0, i - 1);//cal the function reheap_down with 0 as the parent parameter, and the i-1 as 
+		//the last parameter
+	}
+}
