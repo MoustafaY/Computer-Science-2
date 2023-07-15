@@ -8,4 +8,5 @@ a menu prints the following options in the terminal:
 - Re-initialize the list to be empty
 - Print the contents of the list
 - Print the number of items in the list
+
 The items are integers that are stored in the binary tree.
